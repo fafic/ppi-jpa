@@ -13,18 +13,15 @@ import javax.persistence.Persistence;
  *
  * @author Luciano
  */
-public class App {
+public class GeracaoDeTabelas {
     public static void main(String[] args) {
+        
+        //geranado tabelas
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AulaJPA_PU");
         EntityManager em = emf.createEntityManager();
-        Veiculo veiculo = new Veiculo("VW", "Fusca", "12345", "ABC321");
-        
-        em.getTransaction().begin();
-        em.persist(veiculo);
-        em.getTransaction().commit();
-        em.close();
-        
-    
+        em.clear();
+       
     
     }
     

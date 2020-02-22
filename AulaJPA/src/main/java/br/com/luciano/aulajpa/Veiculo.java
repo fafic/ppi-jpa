@@ -6,11 +6,15 @@
 package br.com.luciano.aulajpa;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -28,28 +32,24 @@ public class Veiculo implements Serializable {
     private String modelo;
     @Column(unique = true)
     private String placa;
-    private String chassi;
+    private Double valor;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Pessoa pessoa;
+    private String anoFabricacao;
+    @ManyToMany(mappedBy = "veiculos", cascade = CascadeType.ALL)
+    private List<Acessorio> acessorios;
+    
 
     public Veiculo() {
     }
 
-    public Veiculo(String marca, String modelo, String placa, String chassi) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.placa = placa;
-        this.chassi = chassi;
-    }
-    
-    
    
-
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    
 
     public String getMarca() {
         return marca;
@@ -75,18 +75,45 @@ public class Veiculo implements Serializable {
         this.placa = placa;
     }
 
-    public String getChassi() {
-        return chassi;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setChassi(String chassi) {
-        this.chassi = chassi;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public String getAnoFabricacao() {
+        return anoFabricacao;
+    }
+
+    public void setAnoFabricacao(String anoFabricacao) {
+        this.anoFabricacao = anoFabricacao;
+    }
+
+    public List<Acessorio> getAcessorios() {
+        return acessorios;
+    }
+
+    public void setAcessorios(List<Acessorio> acessorios) {
+        this.acessorios = acessorios;
+    }
+    
+    
 
     @Override
     public String toString() {
-        return "Veiculo{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", placa=" + placa + ", chassi=" + chassi + '}';
+        return "Veiculo{" + "marca=" + marca + ", modelo=" + modelo + ", placa=" + placa + ", valor=" + valor + ", pessoa=" + pessoa + ", anoFabricacao=" + anoFabricacao + '}';
     }
+    
     
     
 
