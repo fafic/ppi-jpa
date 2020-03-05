@@ -5,13 +5,17 @@
  */
 package br.edu.fafic.services;
 
-import br.com.luciano.aulajpa.Funcionario;
-import br.com.luciano.aulajpa.JpaUtil;
+import br.edu.fafic.model.Funcionario;
+import br.edu.fafic.persistence.JpaUtil;
+import java.util.List;
 import javax.persistence.Query;
 
 /**
  *
  * @author Luciano
+ * 
+ * Classe que executa regras de negócio e acesso aos dados, está entra a camada de 
+ * persistência e model
  */
 public class FuncionarioService {
     
@@ -21,9 +25,26 @@ public class FuncionarioService {
         jpa = new JpaUtil();
     }
     
-    public Funcionario getFuncioarioByNome(String nome){
-       Query query = jpa.getEm().createNamedQuery("funcionarioByName");
-       query.setParameter("nome", nome);
+    public Funcionario save(Funcionario funcionario){
+        return (Funcionario)jpa.saveOrUpdate(funcionario);
+    }
+    
+    public Funcionario getFuncionarioById(Long id){
+        return (Funcionario) jpa.findById(Funcionario.class, id);
+    }
+    
+    public void remove(Funcionario funcionario){
+        jpa.remove(funcionario);
+    }
+    
+    public List<Funcionario> getAll(){
+        Query query = jpa.getEm().createNamedQuery("funcionario.getAll");
+        return query.getResultList();
+    }
+    
+    public Funcionario getFuncioarioByMatricula(String matricula){
+       Query query = jpa.getEm().createNamedQuery("funcionarioByMatricula");
+       query.setParameter("matricula", matricula);
        return (Funcionario) query.getSingleResult();
     }
     

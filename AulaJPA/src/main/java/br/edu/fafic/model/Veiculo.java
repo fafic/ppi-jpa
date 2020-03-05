@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -22,6 +24,9 @@ import javax.persistence.SequenceGenerator;
  * @author Luciano
  */
 @Entity
+@NamedQueries({
+@NamedQuery(name = "veiculoaByAno" , query =  "select v.modelo from Veiculo v where v.anoFabricacao=:ano")
+})
 public class Veiculo implements Serializable {
     
     @Id
@@ -42,6 +47,16 @@ public class Veiculo implements Serializable {
 
     public Veiculo() {
     }
+
+    public Veiculo(String marca, String modelo, String placa, Double valor, String anoFabricacao) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.placa = placa;
+        this.valor = valor;
+        this.anoFabricacao = anoFabricacao;
+    }
+    
+    
 
    
     

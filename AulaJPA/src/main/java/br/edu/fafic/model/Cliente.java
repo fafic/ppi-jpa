@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
+import br.edu.fafic.enums.TipoPessoa;
 import javax.persistence.Entity;
 
 /**
@@ -12,18 +13,13 @@ import javax.persistence.Entity;
  * @author Luciano
  */
 @Entity
-public class PessoaFisica extends Pessoa {
-    
-    private String cpf;
+public class Cliente  extends PessoaFisica {
+   
 
-    public String getCpf() {
-        return cpf;
-    }
+  public Cliente(){
+      setTipoPessoa(TipoPessoa.CLIENTE);
+  }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    
     
     
 }

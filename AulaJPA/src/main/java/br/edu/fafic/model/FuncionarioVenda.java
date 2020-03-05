@@ -3,53 +3,66 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Luciano
  */
 @Entity
-public class Acessorio implements Serializable {
+public class FuncionarioVenda implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
-    @ManyToMany
-    private List<Veiculo> veiculos;
+    
+    @OneToOne
+    private Funcionario funcionario;
+    
+    @OneToOne
+    private Venda venda;
+    
+    private Double comissao;
 
     public Long getId() {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public List<Veiculo> getVeiculos() {
-        return veiculos;
+    public Venda getVenda() {
+        return venda;
     }
 
-    public void setVeiculos(List<Veiculo> veiculos) {
-        this.veiculos = veiculos;
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public Double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Double comissao) {
+        this.comissao = comissao;
     }
     
     
-    
+
+   
 
     @Override
     public int hashCode() {
@@ -61,10 +74,10 @@ public class Acessorio implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Acessorio)) {
+        if (!(object instanceof FuncionarioVenda)) {
             return false;
         }
-        Acessorio other = (Acessorio) object;
+        FuncionarioVenda other = (FuncionarioVenda) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +86,7 @@ public class Acessorio implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.luciano.aulajpa.Acessorio[ id=" + id + " ]";
+        return "br.com.luciano.aulajpa.FuncionarioVenda[ id=" + id + " ]";
     }
     
 }

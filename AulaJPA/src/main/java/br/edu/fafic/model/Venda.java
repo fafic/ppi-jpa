@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,10 +31,12 @@ public class Venda implements Serializable {
     //a anotação Cascade ALL replica todas a operações de CRUD feitas na entidade Venda
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemVenda> itens;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Cliente cliente;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Funcionario funcionario;
     
-        
+    private Double comissao;    
     private Double total;
 
     public Long getId() {
@@ -67,6 +69,27 @@ public class Venda implements Serializable {
     public void setTotal(Double total) {
         this.total = total;
     }
+
+    public Funcionario getFuncionario() {
+      if(funcionario == null)  {
+          funcionario = new Funcionario();
+      }
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Double comissao) {
+        this.comissao = comissao;
+    }
+    
+    
 
     @Override
     public int hashCode() {

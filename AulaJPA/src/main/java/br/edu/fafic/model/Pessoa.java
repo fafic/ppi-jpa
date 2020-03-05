@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
-import br.edu.fafci.enums.TipoPessoa;
+import br.edu.fafic.enums.TipoPessoa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -37,7 +38,7 @@ public abstract class Pessoa implements Serializable {
     private List<Veiculo> veiculos;
     @Enumerated(EnumType.STRING)
     private TipoPessoa tipoPessoa;
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
     public String getNome() {
@@ -49,7 +50,7 @@ public abstract class Pessoa implements Serializable {
     }
 
     public List<Veiculo> getVeiculos() {
-        return veiculos;
+           return veiculos;
     }
 
     public void setVeiculos(List<Veiculo> veiculos) {
@@ -67,6 +68,17 @@ public abstract class Pessoa implements Serializable {
 
     public void setTipoPessoa(TipoPessoa tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
+    }
+
+    public Endereco getEndereco() {
+     if(endereco == null)   {
+         endereco = new Endereco();
+     }
+         return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
     
     

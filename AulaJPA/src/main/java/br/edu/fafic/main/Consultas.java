@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.main;
 
+import br.edu.fafic.persistence.JpaUtil;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -30,12 +31,12 @@ public class Consultas {
 //         List<Veiculo> veiculos = typedQuery.getResultList();
 //          veiculos.forEach(v -> System.out.println(v));
 //          
-//          TypedQuery<String> tquery = jpa.getEm().createQuery("select v.modelo from Veiculo v", String.class);
-////          typedQuery.setParameter("anoFabricacao", "2019");
-//          List<String> modelos = tquery.getResultList();
-//          for(String s : modelos){
-//              System.out.println("Modelos:" +s);
-//          }
+          TypedQuery<String> tquery = jpa.getEm().createNamedQuery("veiculoaByAno", String.class);
+          tquery.setParameter("ano", "2019");
+          List<String> modelos = tquery.getResultList();
+          for(String s : modelos){
+              System.out.println("Modelos:" +s);
+          }
 //        TypedQuery<Pessoa> query = jpa.getEm().createQuery("select p from Pessoa p inner join p.veiculos v", Pessoa.class);
 //        List<Pessoa> pessoas = query.getResultList();
 //        for(Pessoa p : pessoas){
@@ -48,10 +49,10 @@ public class Consultas {
 //              System.out.println("Proprietario: " +veiculo.getPessoa().getNome() + " Modelo:" +veiculo.getModelo());
 //          }
 
-         TypedQuery<Funcionario> q = jpa.getEm().createNamedQuery("funcionarioByMatricula", Funcionario.class);
-         q.setParameter("matricula", "2321");
-         Funcionario f = q.getSingleResult();
-         System.out.println("Funcionario:" +f.toString());
+//         TypedQuery<Funcionario> q = jpa.getEm().createNamedQuery("funcionarioByMatricula", Funcionario.class);
+//         q.setParameter("matricula", "2321");
+//         Funcionario f = q.getSingleResult();
+//         System.out.println("Funcionario:" +f.toString());
          
     }
 }

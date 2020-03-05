@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -17,11 +18,12 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name = "funcionarioByMatricula" , query =  "select f from Funcionario f where f.matricula=:matricula ")
+@NamedQuery(name = "funcionarioByMatricula" , query =  "select f from Funcionario f where f.matricula=:matricula "),
+@NamedQuery(name = "funcionario.getAll" , query = "select v from Funcionario v")    
 })
 public class Funcionario extends Pessoa {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Loja loja;
     @Column(unique = true)
     private String matricula;

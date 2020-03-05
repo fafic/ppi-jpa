@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luciano.aulajpa;
+package br.edu.fafic.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
  */
 public class JpaUtil  {
     
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("AulaJPA_PU");
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AulaJPA_PU");
     
     private EntityManager em;
 
@@ -33,6 +33,11 @@ public class JpaUtil  {
         return o;
     }
     
+    //para busca de objetos via find é necessário abrir e fechar a
+    //transação devido ao acesso concorrente
+    //ou seja alguem pode estar alterando um registro que vc quer ler
+    //e isso garante uma das regras ACID da camada de dados
+    // I - isolação (toda transação não pode sofrer interferência por acess concorrente)
     public Object findById(Class clazz, Long id){
         em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -42,6 +47,11 @@ public class JpaUtil  {
         return o;
     }
     
+   
+    
+    public void remove(Object o){
+        
+    }
     
     
 }
